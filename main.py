@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 load_dotenv()
 CLIENT_ID = os.getenv("CLIENT_ID")
 CLIENT_SECRET = os.getenv("CLIENT_SECRET")
-REDIRECT_URI = os.getenv("REDIRECT_URI", "https://4762-2800-e2-9a80-1a5-d97d-6dd1-ce60-8966.ngrok-free.app/auth/callback/")
+REDIRECT_URI = os.getenv("REDIRECT_URI", "https://48fa-2800-e2-9a80-1a5-d97d-6dd1-ce60-8966.ngrok-free.app/auth/callback/")
 SITE_ID = os.getenv("SITE_ID", "MCO")
 ML_API_BASE = "https://api.mercadolibre.com"
 
