@@ -1,0 +1,62 @@
+# Configuración de ngrok para la API de Mercado Libre
+
+Para que tu aplicación funcione correctamente con ngrok y Mercado Libre, debes seguir estos pasos:
+
+## 1. Instala ngrok (si aún no lo has hecho)
+
+Descarga e instala ngrok desde: https://ngrok.com/download
+
+## 2. Configura ngrok con tu cuenta
+
+Regístrate en ngrok.com y obtén tu token de autenticación. Luego configúralo:
+
+```bash
+ngrok config add-authtoken <TU_TOKEN_AQUÍ>
+```
+
+## 3. Inicia tu servidor FastAPI
+
+```bash
+python main.py
+```
+
+O con uvicorn directamente:
+
+```bash
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+## 4. Inicia el túnel ngrok en otra terminal
+
+Para generar la URL específica que has configurado en Mercado Libre:
+
+```bash
+ngrok http 8000 --domain 4762-2800-e2-9a80-1a5-d97d-6dd1-ce60-8966.ngrok-free.app
+```
+
+Si no puedes usar ese dominio específico:
+
+```bash
+ngrok http 8000
+```
+
+Y luego actualiza tu REDIRECT_URI en el archivo .env y en la configuración de la aplicación de Mercado Libre con la nueva URL.
+
+## 5. Verifica la configuración
+
+Accede a la raíz de tu API en:
+https://4762-2800-e2-9a80-1a5-d97d-6dd1-ce60-8966.ngrok-free.app/
+
+Debería mostrarte información sobre los endpoints disponibles.
+
+## Importante
+
+- La URL de ngrok debe ser exactamente la misma en:
+  - La configuración de redirección en Mercado Libre
+  - El valor de REDIRECT_URI en tu archivo .env
+  - El comando para iniciar ngrok
+
+- Si recibes el error ERR_NGROK_3200, probablemente significa que:
+  - El túnel ngrok no está activo o ha expirado
+  - Estás intentando usar un dominio de ngrok reservado sin estar autenticado
+  - El servidor local (FastAPI) no está en ejecución
